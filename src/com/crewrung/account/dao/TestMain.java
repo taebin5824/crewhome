@@ -5,13 +5,15 @@ import java.time.LocalDate;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.crewrung.account.service.FindUserIdService;
 import com.crewrung.account.service.JoinService;
+import com.crewrung.account.service.LoginService;
 import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
-import com.crewrung.account.vo.UserIdFindVO;
+import com.crewrung.account.vo.FindUserIdVO;
 import com.crewrung.account.vo.UserInfoVO;
-import com.crewrung.account.vo.UserPwFindVO;
+import com.crewrung.account.vo.FindUserPwVO;
 import com.crewrung.db.DBCP;
 
 public class TestMain {
@@ -21,17 +23,44 @@ public class TestMain {
 		SqlSession session = sqlfactory.openSession(false);
 
 		AccountDAO dao = new AccountDAO(session);
-		JoinService service = new JoinService(dao);
 		
-		JoinVO joinVO = new JoinVO("user02","1234","김소유","kik@gmail.com","010-1234-1234","소유야","여성",
-		5,"당신의 초등학교 이름은?","초초초","2025-04-12",null,null);
 		
-		int result = service.JoinUser(joinVO);
-		if(result == 1){
-			System.out.println("회원가입 성공!");
+//		JoinService service = new JoinService(dao);
+//		JoinVO joinVO = new JoinVO("user02","1234","김소유","kik@gmail.com","010-1234-1234","소유야","여성",
+//		5,"당신의 초등학교 이름은?","초초초","2025-04-12",null,null);
+//		
+//		int result = service.JoinUser(joinVO);
+//		if(result == 1){
+//			System.out.println("회원가입 성공!");
+//		}else{
+//			System.out.println("회원가입 실패");
+//		}
+		
+//		LoginService service = new LoginService(dao);
+//		
+//		LoginVO loginVO = new LoginVO("user01","1234");
+//		
+//		int result = service.Login(loginVO);
+//		if (result ==1){
+//			System.out.println(loginVO.getNickname());
+//			System.out.println("로그인 성공!");
+//		}else{
+//			System.out.println("로그인 실패!");
+//		}
+		
+		FindUserIdService service = new FindUserIdService(dao);
+		
+		FindUserIdVO findUserIdVO = new FindUserIdVO("kim01@example.com","당신의 출신 초등학교 이름은?","서울초");
+		
+		String result = service.getUserId(findUserIdVO);
+		
+		if(result == null || result.length() < 4){
+			System.out.println("아이디 :" + result);
 		}else{
-			System.out.println("회원가입 실패");
+			System.out.println(result.subSequence(0, 4) + "*");
 		}
+		
+		
 		
 		
 		

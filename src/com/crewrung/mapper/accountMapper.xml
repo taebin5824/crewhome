@@ -6,8 +6,8 @@
 <mapper namespace="accountMapper">
 
 	<select id="Login" parameterType="com.crewrung.account.vo.LoginVO"
-		resultType="java.lang.String">
-		SELECT user_id
+		resultType="com.crewrung.account.vo.LoginVO">
+		SELECT user_id, nickname
 		FROM users
 		WHERE user_id = #{userId} AND
 		user_pw = #{userPw}
@@ -40,7 +40,7 @@
 		#{userId}
 	</select>
 
-	<select id="getUserId" parameterType="com.crewrung.account.vo.UserIdFindVO"
+	<select id="getUserId" parameterType="com.crewrung.account.vo.FindUserIdVO"
 		resultType="java.lang.String">
 		SELECT user_id
 		FROM users
@@ -48,7 +48,7 @@
 		security_question =#{question} AND security_answer = #{answer}
 	</select>
 
-	<select id="getUserPw" parameterType="com.crewrung.account.vo.UserPwFindVO"
+	<select id="getUserPw" parameterType="com.crewrung.account.vo.FindUserPwVO"
 		resultType="java.lang.String">
 		SELECT user_pw
 		FROM users

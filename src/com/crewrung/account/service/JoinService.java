@@ -8,7 +8,6 @@ import com.crewrung.account.vo.JoinVO;
 public class JoinService {
 	
 	private AccountDAO accountDAO;
-	private SqlSessionFactory sqlSessionFactory;
 	
 	public JoinService(AccountDAO accountDAO){
 		this.accountDAO = accountDAO;

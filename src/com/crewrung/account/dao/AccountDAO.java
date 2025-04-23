@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
-import com.crewrung.account.vo.UserIdFindVO;
+import com.crewrung.account.vo.FindUserIdVO;
 import com.crewrung.account.vo.UserInfoVO;
-import com.crewrung.account.vo.UserPwFindVO;
+import com.crewrung.account.vo.FindUserPwVO;
 import com.crewrung.account.vo.UserSetVO;
 
 public class AccountDAO {
@@ -20,9 +20,9 @@ public class AccountDAO {
 		this.con = sqlsession;
 	}
 
-	// 로그인
-	public boolean login(LoginVO loginVO){
-		return con.selectOne("accountMapper.Login",loginVO) != null ? true : false;
+	// 로그인 service
+	public LoginVO login(LoginVO loginVO){
+		return con.selectOne("accountMapper.Login",loginVO);
 	}
 
 	// 마이페이지
@@ -44,7 +44,7 @@ public class AccountDAO {
 		return con.update("accountMapper.setMypage", mypageVO);
 	}
 	
-	// 회원가입
+	// 회원가입 service
 	public int join(JoinVO joinVO){
 		return con.insert("accountMapper.Join", joinVO);
 	}
@@ -55,12 +55,12 @@ public class AccountDAO {
 	}
 	
 	// 아이디 찾기
-	public String getUserId(UserIdFindVO useridFindVO){
+	public String getUserId(FindUserIdVO useridFindVO){
 		return con.selectOne("accountMapper.getUserId", useridFindVO);
 	}
 	
 	// 비밀번호 찾기
-	public String getUserPw(UserPwFindVO userPwFindVO){
+	public String getUserPw(FindUserPwVO userPwFindVO){
 		return con.selectOne("accountMapper.getUserPw", userPwFindVO);
 	}
 	
